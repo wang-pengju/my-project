@@ -27,8 +27,16 @@
     <div class="forgetPassword">
       <p class="info" @click="resetPassword">Forgot password?</p>
     </div>
-    <div class="userSubmit"><el-button>LOG IN</el-button></div>
-    <div class="userSubmit"><el-button>SIGN UP</el-button></div>
+    <div class="userSubmit">
+      <el-button v-loading="loading" type="primary" style="width:100%;margin-bottom: 20px;">LOG IN</el-button>
+    </div>
+    <div class="userSubmit">
+      <el-button type="text" style="width:100%;margin-bottom: 20px;">SIGN UP</el-button>
+    </div>
+  </div>
+  <div class="loginFooter">
+    <span></span> &copy 2017 STAR.STORE
+    <span></span>
   </div>
 </div>
 </template>
@@ -97,6 +105,28 @@ export default {
                 cursor: pointer;
                 color: #c1272d;
             }
+        }
+    }
+    .btn-defalt {
+        color: #c1272d;
+        border: 1px solid #c1272d;
+        &:hover {
+            color: #fff;
+            background-color: #c1272d;
+            border: 1px solid #c1272d;
+        }
+    }
+    .loginFooter {
+        text-align: center;
+        position: absolute;
+        bottom: 50px;
+        width: 100%;
+        color: #80807d;
+        span {
+            border-top: 1px solid #ccc;
+            display: inline-block;
+            width: 150px;
+            vertical-align: middle;
         }
     }
 }

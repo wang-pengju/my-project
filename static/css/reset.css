@@ -130,6 +130,8 @@ table {
 
 body,
 html {
+  width: 100%;
+  min-height: 100%;
   font-family: Helvetica, 'Avenir', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
