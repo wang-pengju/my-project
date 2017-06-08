@@ -1,41 +1,59 @@
 <template>
 <div class="home">
   <div class="homeBody">
-    <div class="homeHeader"></div>
-    <div class="homeSide"></div>
-    <div class="homeContent">
-      <div class="userGuide">
-        <div class="guideWrapper">
-          <p class="tight-margin">Welcome to</p>
-          <h1>Star.Store</h1>
-          <div class="">
-            <p>{{$store.state.count}}</p>
-            <button @click="increment">+</button>
-            <button @click="decrement">-</button>
-          </div>
+    <div class="homeHeader">
+      <div class="panel">
+        <div class="info">{{DESC}}</div>
+        <div class="user">
+          <span>用户信息</span>
+          <i class="el-icon-caret-bottom"></i>
+          <div class="logout">LOGOUT</div>
         </div>
       </div>
+    </div>
+    <div class="homeSide">
+      <mySidebar></mySidebar>
+    </div>
+    <div class="homeContent">
+      <router-view></router-view>
     </div>
   </div>
 </div>
 </template>
 
 <script>
-import {
-  mapState
-} from 'vuex'
+import sideBar from './sidebar/sidebar.vue'
 export default {
-  computed: mapState({
-    count: state => state.count,
-    countAlias: 'count'
-  }),
-  methods: {
-    increment() {
-      this.$store.commit('increment')
-    },
-    decrement() {
-      this.$store.commit('decrement')
+  data() {
+    return {
+      DESC: 'CAMPAIGNS'
     }
+  },
+  computed() {
+    this.fetchData()
+  },
+  watch: {
+    '$route': 'fetchData'
+  },
+  methods: {
+    fetchData() {
+      let path = this.$route.path.split('/')
+      let num = path.length - 1
+      if (path[num]) {
+        if (path[num] === 'campaignList') {
+          this.DESC = 'CAMPAIGNS'
+        } else if (path[num] === 'wallet') {
+          this.DESC = 'WALLET'
+        } else if (path[num] === 'setting') {
+          this.DESC = 'SETTING'
+        } else if (path[num] === 'faq') {
+          this.DESC = 'FAQ'
+        }
+      }
+    }
+  },
+  components: {
+    mySidebar: sideBar
   }
 }
 </script>
@@ -62,6 +80,28 @@ export default {
         line-height: 60px;
         border-bottom: 1px solid #ccc;
         background-color: #fff;
+        .panel {
+            width: 100%;
+            height: 100%;
+            .user {
+                position: absolute;
+                top: 0;
+                right: 40px;
+                i {
+                    margin-left: 15px;
+                    font-size: 12px;
+                    color: #f9ced0;
+                }
+                .logout {
+                    position: absolute;
+                    top: 70px;
+                    right: 0;
+                    padding: 15px 20px;
+                    border-radius: 5px;
+                    border: 1px solid #f9ced0;
+                }
+            }
+        }
     }
     .homeSide {
         position: fixed;
